@@ -4,3 +4,5 @@ Bu tarayıcıyı Python ile kodladım pencereside Python ile sağlandı sadece t
 iç kısımda bulunan yer html ve css ile yazıldı ve tasarım kısmı burası.
 
 Tarayıcı geçmişi kaydedilmiyor. 
+
+Cheetares isimli py dosyası en yenileştirilmiş hali diğer Cheeaters ise daha eski geliştirilmemiş versiyonu olan dosyadır.
