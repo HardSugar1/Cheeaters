@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheetares - Ana Sayfa</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="light">
+    <div class="main-content">
+        <div class="logo-area">
+            <!-- Çita başı SVG logosu -->
+            <svg class="cheetares-logo" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                    <linearGradient id="cheetahGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff9900" />
+                        <stop offset="100%" style="stop-color:#ff6600" />
+                    </linearGradient>
+                    <radialGradient id="eyeGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                        <stop offset="0%" style="stop-color:#6b2e00" />
+                        <stop offset="100%" style="stop-color:#3d1a00" />
+                    </radialGradient>
+                </defs>
+                <!-- Yüzün ana şekli -->
+                <path d="M250,50 C100,50 50,200 50,300 C50,400 150,450 250,450 C350,450 450,400 450,300 C450,200 400,50 250,50 Z" fill="url(#cheetahGradient)"/>
+                <!-- Alt çene/burun bölgesi -->
+                <path d="M250,350 C200,350 180,380 180,400 C180,420 200,440 250,440 C300,440 320,420 320,400 C320,380 300,350 250,350 Z" fill="#ffffff"/>
+                <!-- Burun -->
+                <path d="M250,350 C240,360 260,360 250,370 C240,360 260,360 250,350 Z" fill="#333333"/>
+                <!-- Gözler -->
+                <circle cx="180" cy="220" r="30" fill="#ffffff"/>
+                <circle cx="320" cy="220" r="30" fill="#ffffff"/>
+                <circle cx="180" cy="225" r="15" fill="url(#eyeGradient)"/>
+                <circle cx="320" cy="225" r="15" fill="url(#eyeGradient)"/>
+                <!-- Gözyaşı çizgileri -->
+                <path d="M165,260 L140,340 L160,350 L170,270 Z" fill="#222222"/>
+                <path d="M335,260 L360,340 L340,350 L330,270 Z" fill="#222222"/>
+                <!-- Kulaklar -->
+                <path d="M150,80 C130,50 100,80 120,120 C140,90 150,70 150,80 Z" fill="url(#cheetahGradient)"/>
+                <path d="M350,80 C370,50 400,80 380,120 C360,90 350,70 350,80 Z" fill="url(#cheetahGradient)"/>
+                <!-- İç kulaklar -->
+                <path d="M150,90 C140,70 120,90 130,110 C140,95 150,85 150,90 Z" fill="#555555"/>
+                <path d="M350,90 C360,70 380,90 370,110 C360,95 350,85 350,90 Z" fill="#555555"/>
+                <!-- Ön alın çizgisi -->
+                <path d="M240,60 Q250,40 260,60 L255,150 Q250,160 245,150 Z" fill="#cc5500"/>
+                <!-- Benekler (rastgele yerleşim) -->
+                <circle cx="130" cy="180" r="10" fill="#cc5500"/>
+                <circle cx="370" cy="180" r="10" fill="#cc5500"/>
+                <circle cx="100" cy="250" r="12" fill="#cc5500"/>
+                <circle cx="400" cy="250" r="12" fill="#cc5500"/>
+                <circle cx="160" cy="120" r="8" fill="#cc5500"/>
+                <circle cx="340" cy="120" r="8" fill="#cc5500"/>
+                <circle cx="210" cy="150" r="9" fill="#cc5500"/>
+                <circle cx="290" cy="150" r="9" fill="#cc5500"/>
+            </svg>
+            <h1>Cheetares</h1>
+        </div>
+
+        <div class="search-section">
+            <div class="search-input-group">
+                <input type="text" id="searchInput" placeholder="Web adresini girin veya arama yapın..." onkeydown="if(event.key === 'Enter') performSearch()">
+                <button id="searchButton" onclick="performSearch()">Ara</button>
+            </div>
+            
+            <div class="search-engine-toggle">
+                <label for="searchEngine">Arama Motoru:</label>
+                <select id="searchEngine">
+                    <option value="google">Google</option>
+                    <option value="duckduckgo">DuckDuckGo</option>
+                    <option value="yandex">Yandex</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="quick-links">
+            <a href="https://www.youtube.com" target="_blank">YouTube</a>
+            <a href="https://www.github.com" target="_blank">GitHub</a>
+            <a href="https://www.wikipedia.org" target="_blank">Wikipedia</a>
+        </div>
+    </div>
+
+    <script>
+        // Tema ve arama fonksiyonları (Değişmedi)
+        function setBrowserTheme(theme) {
+            document.body.className = theme;
+            console.log("HTML tema güncellendi:", theme);
+        }
+
+        function performSearch() {
+            const searchText = document.getElementById('searchInput').value;
+            const selectedEngine = document.getElementById('searchEngine').value;
+            let url = "";
+
+            if (searchText.startsWith("http://") || searchText.startsWith("https://")) {
+                url = searchText;
+            } else {
+                switch (selectedEngine) {
+                    case "google":
+                        url = "https://www.google.com/search?q=" + encodeURIComponent(searchText);
+                        break;
+                    case "duckduckgo":
+                        url = "https://duckduckgo.com/?q=" + encodeURIComponent(searchText);
+                        break;
+                    case "yandex":
+                        url = "https://yandex.com.tr/search/?text=" + encodeURIComponent(searchText);
+                        break;
+                    default:
+                        url = "https://www.google.com/search?q=" + encodeURIComponent(searchText);
+                }
+            }
+            
+            window.location.href = url;
+        }
+
+        function updateSearchEngineSelector(engineName) {
+            const selectElement = document.getElementById('searchEngine');
+            for (let i = 0; i < selectElement.options.length; i++) {
+                if (selectElement.options[i].value === engineName.toLowerCase()) {
+                    selectElement.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedEngine = localStorage.getItem('cheetaresSearchEngine');
+            if (savedEngine) {
+                document.getElementById('searchEngine').value = savedEngine;
+            }
+            document.getElementById('searchEngine').addEventListener('change', (event) => {
+                localStorage.setItem('cheetaresSearchEngine', event.target.value);
+            });
+        });
+
+        // Tema geçiş fonksiyonu ekleyelim (örnek için)
+        // Bu fonksiyonu bir buton veya başka bir etkileşimle çağırabilirsiniz
+        function toggleTheme() {
+            const currentTheme = document.body.className;
+            if (currentTheme === 'light') {
+                setBrowserTheme('dark');
+            } else {
+                setBrowserTheme('light');
+            }
+        }
+
+        // Sayfa yüklendiğinde varsayılan temayı ayarla (isteğe bağlı)
+        document.addEventListener('DOMContentLoaded', () => {
+            const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+            if (prefersDarkScheme.matches) {
+                setBrowserTheme('dark');
+            } else {
+                setBrowserTheme('light');
+            }
+
+            // Tema değiştirme butonu ekleyelim (sadece demo amaçlı)
+            const themeToggleButton = document.createElement('button');
+            themeToggleButton.textContent = 'Temayı Değiştir';
+            themeToggleButton.style.position = 'absolute';
+            themeToggleButton.style.top = '20px';
+            themeToggleButton.style.right = '20px';
+            themeToggleButton.style.padding = '10px 15px';
+            themeToggleButton.style.borderRadius = '5px';
+            themeToggleButton.style.border = 'none';
+            themeToggleButton.style.backgroundColor = 'var(--cheetah-blue)';
+            themeToggleButton.style.color = 'white';
+            themeToggleButton.style.cursor = 'pointer';
+            themeToggleButton.onclick = toggleTheme;
+            document.body.appendChild(themeToggleButton);
+        });
+
+    </script>
+</body>
+</html>
